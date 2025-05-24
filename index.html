@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蕉圖表🍌輸入文字數值就能生出圖表喔！</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>蕉圖表🍌</h1>
+    <p>這是一款輸入文字和數值就能繪製圖表的工具，支援純鍵盤操作。</p>
+
+    <label for="chartTitle">圖表名稱：</label>
+    <input type="text" id="chartTitle" aria-label="圖表名稱" id="firstInput">
+
+    <label for="xLabel">X 軸名稱／（單位）：</label>
+    <input type="text" id="xLabel" aria-label="X 軸名稱 單位">
+
+    <label for="xLabels">X 軸標籤（請以逗號或換行分隔）：</label>
+    <textarea id="xLabels" aria-label="X 軸標籤輸入，請以逗號或換行分隔" rows="3" placeholder="例如：一月, 二月, 三月"></textarea>
+
+    <section id="itemsSection" aria-label="多組 X 軸資料輸入區"></section>
+
+    <button id="addItemBtn" aria-label="新增X軸項目，最多5項，每項可選顏色">新增X軸項目</button>
+
+    <label for="yLabel">Y 軸名稱／（單位）：</label>
+    <input type="text" id="yLabel" aria-label="Y 軸名稱 單位">
+
+    <div class="chart-option-group">
+      <label for="chartType">圖表類型：</label>
+      <select id="chartType" aria-label="圖表類型">
+        <option value="bar">直方圖</option>
+        <option value="horizontalBar">橫條圖</option>
+        <option value="line">折線圖</option>
+      </select>
+    </div>
+
+    <button id="drawChartBtn" aria-label="繪製圖表">繪製圖表</button>
+    <button id="clearBtn" aria-label="清除圖表">清除</button>
+    <button id="copyBtn" aria-label="複製圖表">複製圖表</button>
+
+    <label for="downloadFormat">下載格式：</label>
+    <select id="downloadFormat" aria-label="下載格式">
+      <option value="jpg">JPG</option>
+      <option value="csv">CSV</option>
+    </select>
+    <button id="downloadBtn" aria-label="以另存新檔方式下載圖表">另存新檔</button>
+
+    <canvas id="myChart" width="400" height="400" role="img" aria-label="繪製的圖表"></canvas>
+    <div id="liveRegion" aria-live="polite" style="position:absolute; left:-9999px;"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 開發者：Lîm A-kâu（林阿猴）& Kim Chio（金蕉），供免費教學及學習使用。</p>
+  </footer>
+
+<script>
+  window.addEventListener('load', () => {
+    const firstInput = document.getElementById('firstInput');
+    if (firstInput) {
+      firstInput.focus();
+    }
+  });
+</script>
+
+  <script src="libs/Chart.min.js"></script>
+  <script src="libs/html2canvas.min.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

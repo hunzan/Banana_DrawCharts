@@ -1,0 +1,102 @@
+body {
+  background-color: #fff8dc;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+input[type="text"],
+select,
+input[type="color"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 5px 5px 10px 0;
+  font-size: 1rem;
+  border: 5px solid #333;
+  background-color: #f4d03f;
+  color: #000;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+button:hover {
+  background-color: #f7dc6f;
+}
+
+canvas {
+  display: block;
+  margin-top: 20px;
+  max-width: 80%;
+}
+
+footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+#dataInputs {
+  margin-bottom: 10px;
+}
+
+.colorPicker {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.chart-option-group {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.chart-option-group label {
+  margin-top: 0;
+}
+
+.chart-section {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #ccc;
+}
+
+.item-entry {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #fffaf0;
+  border: 2px dashed #999;
+  border-radius: 8px;
+}
+
+.item-entry label {
+  margin-top: 5px;
+}
+
+.color-label {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
