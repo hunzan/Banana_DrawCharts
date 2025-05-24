@@ -62,6 +62,8 @@ Banana_DrawCharts/
 
 👉 前往 Banana_DrawCharts 線上版
 
+https://hunzan.github.io/Banana_DrawCharts/
+
 若為本機使用：
 
 將整個資料夾下載並解壓縮
