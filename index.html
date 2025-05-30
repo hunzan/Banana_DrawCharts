@@ -33,7 +33,7 @@
 
     <section id="itemsSection" aria-label="多組 X 軸資料輸入區"></section>
 
-    <button id="addItemBtn" aria-label="新增X軸項目，最多7項，每項可選顏色">新增X軸項目</button>
+    <button id="addItemBtn" aria-label="新增X軸項目，最多9項，每項可選顏色">新增X軸項目</button>
 
     <label for="yLabel">Y 軸名稱／（單位）：</label>
     <input type="text" id="yLabel" aria-label="Y 軸名稱 單位">
@@ -41,11 +41,14 @@
     <div class="chart-option-group">
       <label for="chartType">圖表類型：</label>
       <select id="chartType" aria-label="圖表類型">
+        <option value="bar">直條圖</option>
+        <option value="horizontalBar">橫條圖</option>
+        <option value="stackedBar">堆疊直條圖</option>
+        <option value="stackedHorizontalBar">堆疊橫條圖</option>
         <option value="line">折線圖</option>
-        <option value="bar">柱狀圖</option>
         <option value="area">區域圖</option>
         <option value="radar">雷達圖</option>
-        <option value="mixed">混合圖（線＋柱）</option>
+        <option value="mixed">混合圖（折線＋直條）</option>
         <option value="pie">圓餅圖</option>
         <option value="doughnut">甜甜圈圖</option>
         <option value="polarArea">極區圖</option>

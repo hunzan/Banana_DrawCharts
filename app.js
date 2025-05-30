@@ -128,8 +128,8 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
   }
 
   addItemBtn.addEventListener('click', function () {
-  if (itemCount >= 7) {
-    alert('最多只能新增 7 個項目！');
+  if (itemCount >= 9) {
+    alert('最多只能新增 9 個項目！');
     return;
   }
   itemCount++;
@@ -284,15 +284,16 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
     chartCanvas.width = 600;
     chartCanvas.height = 400;
 
+    const isStacked = chartType === 'stackedBar' || chartType === 'stackedHorizontalBar';
+
     const realType = chartType === 'area' ? 'line'
-                      : chartType === 'horizontalBar' ? 'bar'
-                      : chartType === 'mixed' ? 'bar'
+                      : ['stackedBar', 'stackedHorizontalBar', 'horizontalBar', 'mixed'].includes(chartType) ? 'bar'
                       : chartType;
 
     const options = {
       responsive: false,
       maintainAspectRatio: false,
-      indexAxis: chartType === 'horizontalBar' ? 'y' : 'x',
+      indexAxis: chartType === 'horizontalBar' || chartType === 'stackedHorizontalBar' ? 'y' : 'x',
       plugins: {
         title: {
           display: !!chartTitle,
@@ -304,23 +305,22 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
           position: 'top',
           labels: { font: { size: 20 } }
         }
-      }
-    };
-
-    if (realType !== 'radar') {
-      options.scales = {
+      },
+      scales: realType !== 'radar' ? {
         x: {
           title: { display: true, text: xLabel },
           beginAtZero: true,
-          ticks: { font: { size: 20 } }
+          ticks: { font: { size: 20 } },
+          stacked: isStacked
         },
         y: {
           title: { display: true, text: yLabel },
           beginAtZero: true,
-          ticks: { font: { size: 20 } }
+          ticks: { font: { size: 20 } },
+          stacked: isStacked
         }
-      };
-    }
+      } : undefined
+    };
 
     myChart = new Chart(chartCanvas, {
       type: realType,
