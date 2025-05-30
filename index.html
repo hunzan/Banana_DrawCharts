@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>蕉圖表🍌輸入文字數值就能生出圖表喔！</title>
+  <title>蕉圖表 純鍵盤操作友善圖表繪製工具</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="bananachart.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="bananachart.ico" type="image/x-icon">
 </head>
 <body>
   <main>
     <h1>蕉圖表🍌</h1>
-    <p>這是一款輸入文字和數值就能繪製圖表的工具，支援純鍵盤操作。</p>
+    <p>這是一款輸入文字和數值就能繪製圖表的工具，支援純鍵盤操作，可依序填入欄位，也可載入格式正確的 CSV 檔，請按 tab 鍵到第一欄圖表名稱。</p>
 
     <label for="chartTitle">圖表名稱：</label>
     <input type="text" id="chartTitle" aria-label="圖表名稱" id="firstInput">
+
+    <label for="csvInput">載入 CSV：</label>
+    <!-- 用來選擇 CSV 檔案的隱藏檔案輸入框 -->
+    <input type="file" id="csvInput" accept=".csv" style="display:none" />
+    <!-- 讓使用者點擊這個按鈕時，觸發打開檔案選擇視窗 -->
+    <button id="csvButton">載入 CSV 檔案
+    <button id="csvHelpBtn" aria-label="CSV 格式說明">CSV 格式說明</button>
 
     <label for="xLabel">X 軸名稱／（單位）：</label>
     <input type="text" id="xLabel" aria-label="X 軸名稱 單位">
@@ -22,7 +31,7 @@
 
     <section id="itemsSection" aria-label="多組 X 軸資料輸入區"></section>
 
-    <button id="addItemBtn" aria-label="新增X軸項目，最多5項，每項可選顏色">新增X軸項目</button>
+    <button id="addItemBtn" aria-label="新增X軸項目，最多7項，每項可選顏色">新增X軸項目</button>
 
     <label for="yLabel">Y 軸名稱／（單位）：</label>
     <input type="text" id="yLabel" aria-label="Y 軸名稱 單位">
@@ -30,9 +39,11 @@
     <div class="chart-option-group">
       <label for="chartType">圖表類型：</label>
       <select id="chartType" aria-label="圖表類型">
-        <option value="bar">直方圖</option>
-        <option value="horizontalBar">橫條圖</option>
         <option value="line">折線圖</option>
+        <option value="bar">柱狀圖</option>
+        <option value="area">區域圖</option>
+        <option value="radar">雷達圖</option>
+        <option value="mixed">混合圖（線＋柱）</option>
       </select>
     </div>
 
@@ -42,12 +53,12 @@
 
     <label for="downloadFormat">下載格式：</label>
     <select id="downloadFormat" aria-label="下載格式">
-      <option value="jpg">JPG</option>
+      <option value="png">PNG</option>
       <option value="csv">CSV</option>
     </select>
     <button id="downloadBtn" aria-label="以另存新檔方式下載圖表">另存新檔</button>
 
-    <canvas id="myChart" width="400" height="400" role="img" aria-label="繪製的圖表"></canvas>
+    <canvas id="myChart" width="600" height="400" role="img" aria-label="繪製的圖表"></canvas>
     <div id="liveRegion" aria-live="polite" style="position:absolute; left:-9999px;"></div>
   </main>
 
@@ -56,12 +67,19 @@
   </footer>
 
 <script>
-  window.addEventListener('load', () => {
-    const firstInput = document.getElementById('firstInput');
-    if (firstInput) {
-      firstInput.focus();
-    }
-  });
+// 上面這段 focus 控制邏輯貼在這裡
+window.addEventListener('DOMContentLoaded', () => {
+  const firstInput = document.getElementById('firstInput');
+
+  function enableFocusOnce() {
+    firstInput.focus();
+    window.removeEventListener('keydown', enableFocusOnce);
+    window.removeEventListener('mousedown', enableFocusOnce);
+  }
+
+  window.addEventListener('keydown', enableFocusOnce);
+  window.addEventListener('mousedown', enableFocusOnce);
+});
 </script>
 
 <script src="./libs/chart.min.js"></script>

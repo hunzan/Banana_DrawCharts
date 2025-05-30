@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>CSV 格式說明 - 蕉圖表🍌</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 1rem; }
+    h1 { color: #333; }
+    pre {
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSV 格式說明</h1>
+  <p>本工具可上傳 CSV 檔節省 X 欄位一個個新增欄位的時間，請依照以下格式準備 CSV 檔案，才能正確載入並繪製圖表。</p>
+  <p>例如您想要繪製一份「本年度第一季水果銷量營收」統計圖表，CSV 檔的內容如下：</p>
+  <pre>
+項目名稱,顏色,一月,二月,三月
+蘋果,紅色,8000,9500,6700
+香蕉,黃色,12000,12500,9900
+葡萄,紫色,6300,5600,4200
+  </pre>
+  <p>備註：</p>
+  <ul>
+    <li>第一列為標題列，第一欄是資料名稱，後面是數值。</li>
+    <li>欄位用逗號或斷行分隔，請勿有多餘空格。</li>
+    <li>數值欄請填數字，避免空白或文字。</li>
+    <li>CSV 檔小技巧：用純文字建檔後，將副檔名從 .txt 改成 .csv 即可。</li>
+  </ul>
+  <button onclick="window.close()">關閉視窗</button>
+</body>
+</html>

@@ -1,8 +1,11 @@
+/* ✅ 限制整體內容不會太寬 */
 body {
   background-color: #fff8dc;
   font-family: Arial, sans-serif;
   padding: 20px;
   color: #333;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 h1 {
@@ -77,10 +80,14 @@ footer {
   margin-top: 0;
 }
 
-.chart-section {
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px dashed #ccc;
+#chartContainer {
+  height: 400px;   /* 控制最大高度 */
+  position: relative;
+}
+
+#myChart {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .item-entry {
