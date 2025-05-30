@@ -19,3 +19,4 @@ node_modules/
 
 # 不想傳的個人設定檔
 .env
+test.html test.js

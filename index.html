@@ -9,18 +9,18 @@
   <link rel="shortcut icon" href="bananachart.ico" type="image/x-icon">
 </head>
 <body>
-  <main>
-    <h1>蕉圖表🍌</h1>
-    <p>這是一款輸入文字和數值就能繪製圖表的工具，支援純鍵盤操作，可依序填入欄位，也可載入格式正確的 CSV 檔，請按 tab 鍵到第一欄圖表名稱。</p>
+  <main role="main" aria-labelledby="pageTitle" aria-describedby="description">
+    <h1 id="pageTitle">蕉圖表🍌</h1>
+    <p id="description">這是一款輸入文字和數值就能繪製圖表的工具，支援純鍵盤操作，可依序填入欄位，也可載入格式正確的 CSV 檔，請按 tab 鍵到第一欄圖表名稱。</p>
 
     <label for="chartTitle">圖表名稱：</label>
-    <input type="text" id="chartTitle" aria-label="圖表名稱" id="firstInput">
+    <input type="text" id="chartTitle" aria-label="圖表名稱" aria-describedby="description">
 
     <label for="csvInput">載入 CSV：</label>
     <!-- 用來選擇 CSV 檔案的隱藏檔案輸入框 -->
     <input type="file" id="csvInput" accept=".csv" style="display:none" />
     <!-- 讓使用者點擊這個按鈕時，觸發打開檔案選擇視窗 -->
-    <button id="csvButton">載入 CSV 檔案
+    <button id="csvButton">載入 CSV 檔案</button>
     <button id="csvHelpBtn" aria-label="CSV 格式說明">CSV 格式說明</button>
 
     <label for="xLabel">X 軸名稱／（單位）：</label>
@@ -60,6 +60,11 @@
 
     <canvas id="myChart" width="600" height="400" role="img" aria-label="繪製的圖表"></canvas>
     <div id="liveRegion" aria-live="polite" style="position:absolute; left:-9999px;"></div>
+
+    <div id="liveRegion" aria-live="polite" aria-atomic="true"
+     style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+    </div>
+
   </main>
 
   <footer>

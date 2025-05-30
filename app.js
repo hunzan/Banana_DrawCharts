@@ -158,6 +158,17 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
     });
   }
 
+  function announceToScreenReader(message) {
+    const liveRegion = document.getElementById('liveRegion');
+    if (liveRegion) {
+      // 強制重設內容來觸發朗讀
+      liveRegion.textContent = '';
+      setTimeout(() => {
+        liveRegion.textContent = message;
+      }, 100);
+    }
+  }
+
   drawChartBtn.addEventListener('click', drawChart);
 
   function drawChart() {
