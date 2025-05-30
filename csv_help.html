@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>CSV 格式說明 - 蕉圖表🍌</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 1rem; }
+    body { font-family: Arial, sans-serif; padding: 1rem; line-height: 1.6; }
     h1 { color: #333; }
     pre {
       background-color: #f4f4f4;
@@ -12,25 +12,47 @@
       padding: 1rem;
       white-space: pre-wrap;
     }
+    .note {
+      background-color: #fff3cd;
+      border: 1px solid #ffeeba;
+      padding: 1rem;
+      margin: 1rem 0;
+      color: #856404;
+    }
   </style>
 </head>
 <body>
-  <h1>CSV 格式說明</h1>
-  <p>本工具可上傳 CSV 檔節省 X 欄位一個個新增欄位的時間，請依照以下格式準備 CSV 檔案，才能正確載入並繪製圖表。</p>
-  <p>例如您想要繪製一份「本年度第一季水果銷量營收」統計圖表，CSV 檔的內容如下：</p>
+  <h1>使用說明</h1>
+
+  <p>這是一款輸入文字和數值就能繪製圖表的工具，支援純鍵盤操作。</p>
+
+  <p>本工具可依序填入欄位，也可載入格式正確的 CSV 檔上傳載入 X 軸欄位，節省手動新增項目及輸入數值的時間。請依下列格式準備檔案，才能正確載入並繪製圖表。</p>
+
+  <p>例如您想要繪製一份「本年度第一季文具銷量營收」的統計圖表，CSV 檔內容如下：</p>
+
   <pre>
 項目名稱,顏色,一月,二月,三月
-蘋果,紅色,8000,9500,6700
-香蕉,黃色,12000,12500,9900
-葡萄,紫色,6300,5600,4200
+原子筆,紅色,8000,9500,6700
+立可帶,黃色,12000,12500,9900
+文件夾,紫色,6300,5600,4200
   </pre>
-  <p>備註：</p>
+
+  <div class="note">
+    ⚠️ <strong>提醒：</strong><br>
+    X 軸標籤欄（第一列的數值欄名稱，例如「一月、二月、三月」）<br>
+    <strong>不可空白</strong>，即使某些圖表（如圓餅圖、甜甜圈圖、極區圖）不會顯示 X 軸，<br>
+    為了能正確產圖與下載 CSV 檔，仍然需要填寫。
+    繪製「圓餅圖」、「甜甜圈圖」和「極區圖」時的 Y 軸 可填寫單位名稱。
+  </div>
+
+  <h3>備註：</h3>
   <ul>
-    <li>第一列為標題列，第一欄是資料名稱，後面是數值。</li>
-    <li>欄位用逗號或斷行分隔，請勿有多餘空格。</li>
-    <li>數值欄請填數字，避免空白或文字。</li>
-    <li>CSV 檔小技巧：用純文字建檔後，將副檔名從 .txt 改成 .csv 即可。</li>
+    <li>第一列為標題列，第一欄是資料名稱，後面是數值欄位。</li>
+    <li>欄位可用逗號或換行分隔，請勿有多餘空格。</li>
+    <li>數值欄只能填數字，避免空白或文字。</li>
+    <li>CSV 小技巧：可用純文字檔（.txt）建好後，將副檔名改成 .csv。</li>
   </ul>
+
   <button onclick="window.close()">關閉視窗</button>
 </body>
 </html>

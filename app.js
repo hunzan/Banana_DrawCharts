@@ -172,16 +172,79 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
   drawChartBtn.addEventListener('click', drawChart);
 
   function drawChart() {
+    const chartType = chartTypeSelect.value;
+    const chartTitle = chartTitleInput.value;
+    const xLabel = xAxisLabelInput.value;
+    const yLabel = yAxisLabelInput.value;
+
+    // 先處理 pie / doughnut / polarArea 類型
+    if (['pie', 'doughnut', 'polarArea'].includes(chartType)) {
+      const labels = [];
+      const data = [];
+      const backgroundColors = [];
+
+      for (let i = 1; i <= itemCount; i++) {
+        const name = document.getElementById(`itemName${i}`).value.trim();
+        const colorName = document.getElementById(`itemColor${i}`).value;
+        const color = colorMap[colorName] || '#000000';
+        const rawValue = document.getElementById(`itemValues${i}`).value.trim();
+
+        if (!name) return alert(`項目 ${i} 名稱未填`);
+        if (!rawValue) return alert(`項目 ${i} 數值未填`);
+
+        const value = parseFloat(rawValue);
+        if (isNaN(value)) return alert(`項目 ${i} 數值格式錯誤`);
+
+        labels.push(name);
+        data.push(value);
+        backgroundColors.push(color);
+      }
+
+      if (!labels.length) return alert('請新增至少一個項目');
+
+      if (myChart) myChart.destroy();
+
+      const chartCanvas = document.getElementById('myChart');
+      chartCanvas.width = 600;
+      chartCanvas.height = 400;
+
+      myChart = new Chart(chartCanvas, {
+        type: chartType,
+        data: {
+          labels,
+          datasets: [{
+            label: yLabel, // 可放單位說明
+            data,
+            backgroundColor: backgroundColors
+          }]
+        },
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: !!chartTitle,
+              text: chartTitle,
+              font: { size: 28 }
+            },
+            legend: {
+              display: true,
+              position: 'top',
+              labels: { font: { size: 20 } }
+            }
+          }
+        }
+      });
+
+      return; // 🎯 不往下跑，已處理完畢
+    }
+
+    // 其他標準圖表處理邏輯（bar, line, area, radar, mixed）
     const rawLabels = xLabelsInput.value.trim();
     if (!rawLabels) return alert('請輸入 X 軸標籤');
 
     const labels = rawLabels.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
     if (!labels.length) return alert('X 軸標籤不能為空');
-
-    const chartType = chartTypeSelect.value;
-    const chartTitle = chartTitleInput.value;
-    const xLabel = xAxisLabelInput.value;
-    const yLabel = yAxisLabelInput.value;
 
     const datasets = [];
     for (let i = 1; i <= itemCount; i++) {
@@ -197,7 +260,6 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
       if (values.length !== labels.length) return alert(`項目 ${i} 的數值數量 (${values.length}) 與 X 軸標籤數量 (${labels.length}) 不符`);
       if (values.some(v => isNaN(v))) return alert(`項目 ${i} 數值格式錯誤`);
 
-      // 決定 dataset 的型別（混合圖要個別指定 type）
       const dataset = {
         label: name,
         data: values,
@@ -224,7 +286,7 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
 
     const realType = chartType === 'area' ? 'line'
                       : chartType === 'horizontalBar' ? 'bar'
-                      : chartType === 'mixed' ? 'bar' // 主要 type 為 bar，dataset 內再各別指定
+                      : chartType === 'mixed' ? 'bar'
                       : chartType;
 
     const options = {
@@ -245,7 +307,6 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
       }
     };
 
-    // 雷達圖不需要 indexAxis 和 scales
     if (realType !== 'radar') {
       options.scales = {
         x: {
@@ -267,7 +328,7 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
       options
     });
 
-    document.getElementById('liveRegion').textContent = '圖表已繪製完成';
+   document.getElementById('liveRegion').textContent = '圖表已繪製完成';
   }
 
   // 補：透明色用
@@ -477,6 +538,80 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
     const g = Math.floor(Math.random() * 200) + 30;
     const b = Math.floor(Math.random() * 200) + 30;
     return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  // 處理圓餅圖類型的 CSV 下載
+  function prepareAndDownloadCSV() {
+    const chartType = chartTypeSelect.value;
+
+    // 圓餅圖類型不檢查 X 軸標籤，其他圖表要檢查
+    if (!['pie', 'doughnut', 'polarArea'].includes(chartType)) {
+      const rawLabels = xLabelsInput.value.trim();
+      if (!rawLabels) {
+        alert('請輸入 X 軸標籤');
+        return;
+      }
+    }
+
+    let labels;
+    let csvData = '';
+
+    if (['pie', 'doughnut', 'polarArea'].includes(chartType)) {
+      // 圓餅圖用項目名稱當標籤，數值各一列
+      labels = [];
+      const values = [];
+
+      for (let i = 1; i <= itemCount; i++) {
+        const name = document.getElementById(`itemName${i}`).value.trim();
+        const rawValue = document.getElementById(`itemValues${i}`).value.trim();
+        if (name && rawValue) {
+          labels.push(name);
+          values.push(rawValue);
+        }
+      }
+
+      // CSV格式：標題列 + 單行數值
+      csvData += labels.join(',') + '\n';
+      csvData += values.join(',') + '\n';
+
+    } else {
+      // 其他圖表 X 軸標籤
+      labels = xLabelsInput.value.trim().split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
+
+      // 產生欄位標題列（X軸標籤在第一欄，後面每欄是項目名稱）
+      csvData += ['X軸標籤'];
+      for (let i = 1; i <= itemCount; i++) {
+        const name = document.getElementById(`itemName${i}`).value.trim();
+        if (!name) {
+          alert(`項目 ${i} 名稱未填`);
+          return;
+        }
+        csvData += ',' + name;
+      }
+      csvData += '\n';
+
+      // 產生資料列，每列一個 X 軸標籤對應所有項目數值
+      for (let row = 0; row < labels.length; row++) {
+        let rowData = labels[row];
+        for (let col = 1; col <= itemCount; col++) {
+          const rawValues = document.getElementById(`itemValues${col}`).value.trim();
+          if (!rawValues) {
+            alert(`項目 ${col} 數值未填`);
+            return;
+          }
+          const values = rawValues.split(/[\n,]+/).map(v => v.trim());
+          if (values.length !== labels.length) {
+            alert(`項目 ${col} 的數值數量 (${values.length}) 與 X 軸標籤數量 (${labels.length}) 不符`);
+            return;
+          }
+          rowData += ',' + values[row];
+        }
+        csvData += rowData + '\n';
+      }
+    }
+
+    const filename = `${chartType}_chart.csv`;
+    downloadCSV(csvData, filename);
   }
 
   function downloadCSV(csvData, filename) {

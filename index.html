@@ -11,7 +11,10 @@
 <body>
   <main role="main" aria-labelledby="pageTitle" aria-describedby="description">
     <h1 id="pageTitle">蕉圖表🍌</h1>
-    <p id="description">這是一款輸入文字和數值就能繪製圖表的工具，支援純鍵盤操作，可依序填入欄位，也可載入格式正確的 CSV 檔，請按 tab 鍵到第一欄圖表名稱。</p>
+
+    <button id="csvHelpBtn" style="background-color: #eef; border: 1px solid #99c; padding: 0.5em 1em; border-radius: 5px;">
+    📘 本工具使用說明
+    </button>
 
     <label for="chartTitle">圖表名稱：</label>
     <input type="text" id="chartTitle" aria-label="圖表名稱" aria-describedby="description">
@@ -21,7 +24,6 @@
     <input type="file" id="csvInput" accept=".csv" style="display:none" />
     <!-- 讓使用者點擊這個按鈕時，觸發打開檔案選擇視窗 -->
     <button id="csvButton">載入 CSV 檔案</button>
-    <button id="csvHelpBtn" aria-label="CSV 格式說明">CSV 格式說明</button>
 
     <label for="xLabel">X 軸名稱／（單位）：</label>
     <input type="text" id="xLabel" aria-label="X 軸名稱 單位">
@@ -44,6 +46,10 @@
         <option value="area">區域圖</option>
         <option value="radar">雷達圖</option>
         <option value="mixed">混合圖（線＋柱）</option>
+        <option value="pie">圓餅圖</option>
+        <option value="doughnut">甜甜圈圖</option>
+        <option value="polarArea">極區圖</option>
+
       </select>
     </div>
 
@@ -85,6 +91,15 @@ window.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('keydown', enableFocusOnce);
   window.addEventListener('mousedown', enableFocusOnce);
 });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const helpButton = document.getElementById('csvHelpBtn');
+    if (helpButton) {
+      helpButton.focus();
+    }
+  });
 </script>
 
 <script src="./libs/chart.min.js"></script>
