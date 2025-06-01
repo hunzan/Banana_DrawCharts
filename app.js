@@ -628,6 +628,8 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+
+      alert("檔案已下載！請用『檔案管理器』或『純文字編輯器』開啟檔案，避免用 Google Sheets 直接開啟，否則可能導致格式錯誤喔！");
     }
   }
   })
@@ -640,15 +642,3 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
       });
     }
   });
-
-  function downloadCSV(csvContent, filename = "資料.csv") {
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", filename);  // 強制觸發下載
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
