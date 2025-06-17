@@ -83,9 +83,10 @@
     <p>© 2025 開發者：Lîm A-kâu（林阿猴）& Kim Chio（金蕉），供免費教學及學習使用。</p>
   </footer>
 
-<script src="../static/libs/chart.min.js"></script>
+<!-- JS libraries -->
+<script src="{{ url_for('static', filename='libs/chart.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="../static/app.js"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
 
 </body>
 </html>
