@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>蕉圖表🍌鍵盤友善介面圖表繪製工具</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="bananachart.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="bananachart.ico" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='bananachart.ico') }}" type="image/x-icon">
+
 </head>
 <body>
   <a href="#mainContent" class="skip-link">跳到主要內容</a>
@@ -83,34 +83,9 @@
     <p>© 2025 開發者：Lîm A-kâu（林阿猴）& Kim Chio（金蕉），供免費教學及學習使用。</p>
   </footer>
 
-<script>
-// 上面這段 focus 控制邏輯貼在這裡
-window.addEventListener('DOMContentLoaded', () => {
-  const firstInput = document.getElementById('firstInput');
-
-  function enableFocusOnce() {
-    firstInput.focus();
-    window.removeEventListener('keydown', enableFocusOnce);
-    window.removeEventListener('mousedown', enableFocusOnce);
-  }
-
-  window.addEventListener('keydown', enableFocusOnce);
-  window.addEventListener('mousedown', enableFocusOnce);
-});
-</script>
-
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const helpButton = document.getElementById('csvHelpBtn');
-    if (helpButton) {
-      helpButton.focus();
-    }
-  });
-</script>
-
-<script src="./libs/chart.min.js"></script>
+<script src="../static/libs/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="app.js"></script>
+<script src="../static/app.js"></script>
 
 </body>
 </html>

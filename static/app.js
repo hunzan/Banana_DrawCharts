@@ -669,3 +669,26 @@ if (toggleBtn) {
     }
   });
 }
+document.getElementById('csvHelpBtn').addEventListener('click', function () {
+  window.open('/csv-help', '_blank', 'width=600,height=600');
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  const firstInput = document.getElementById('firstInput');
+
+  function enableFocusOnce() {
+    firstInput.focus();
+    window.removeEventListener('keydown', enableFocusOnce);
+    window.removeEventListener('mousedown', enableFocusOnce);
+  }
+
+  window.addEventListener('keydown', enableFocusOnce);
+  window.addEventListener('mousedown', enableFocusOnce);
+});
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const helpButton = document.getElementById('csvHelpBtn');
+    if (helpButton) {
+      helpButton.focus();
+    }
+  });

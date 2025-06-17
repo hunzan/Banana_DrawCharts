@@ -1,22 +1,63 @@
-# 忽略 macOS 系統檔
-.DS_Store
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.venv
+env/
+venv/
+ENV/
+VENV/
+.venv/
+Pipfile.lock
 
-# 忽略 Windows 系統檔
-Thumbs.db
-desktop.ini
-
-# 忽略 Python IDE 設定
-.idea/
+# VS Code
 .vscode/
 
-# 暫存圖檔或匯出的檔案
-*.jpg
-*.png
-*.csv
+# PyCharm
+.idea/
 
-# node/npm 暫存檔（如果你未來加入 npm 套件）
-node_modules/
+# Byte-compiled / compiled files
+*.so
 
-# 不想傳的個人設定檔
-.env
-test.html test.js
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs
+*.log
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+.cache
+pytest_cache/
+
+# MacOS / Windows / Linux system files
+.DS_Store
+Thumbs.db
+
+# Render logs (若有用本地 log 紀錄)
+*.sqlite3
+*.db
+
+# Word / Excel / Zip 暫存（視需求保留）
+*.docx~
+*.xlsx~
+*.zip~
