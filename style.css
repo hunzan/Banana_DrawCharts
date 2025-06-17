@@ -20,6 +20,21 @@ label {
   font-weight: bold;
 }
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 100;
+  text-decoration: none;
+  font-weight: bold;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 input[type="text"],
 select,
 input[type="color"] {
@@ -27,24 +42,87 @@ input[type="color"] {
   padding: 8px;
   margin-top: 5px;
   margin-bottom: 10px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  border: 3px solid #6C6C6C;
+  border-radius: 3px;
   box-sizing: border-box;
 }
 
-button {
+textarea {
+  border: 4px solid #CE0000; /* 粗一點 & 比較深的邊框色 */
+  border-radius: 4px;     /* 可有可無，看你想不要圓角 */
+  padding: 0.5rem;        /* 內距舒服一點 */
+}
+
+/* 共用樣式 */
+button.btn {
   padding: 10px 15px;
   margin: 5px 5px 10px 0;
   font-size: 1rem;
-  border: 5px solid #333;
-  background-color: #f4d03f;
-  color: #000;
-  cursor: pointer;
+  border: 4px solid #333;
   border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-button:hover {
-  background-color: #f7dc6f;
+/* 功能專屬配色 */
+
+button.csvHelp {
+  background-color: #D2E9FF	; /* 水藍 */
+  border-color: #46A3FF;
+}
+
+button.csv {
+  background-color: #FFDCB9; /* 粉膚 */
+  border-color: #FF8000;
+}
+
+button.addItem {
+  background-color: #FFD0FF; /* 淺紫 */
+  border-color: #990099;
+}
+
+button.draw {
+  background-color: #f8d7da; /* 淺紅 */
+  border-color: #dc3545;
+}
+
+button.clear {
+  background-color: #d1ecf1; /* 淺藍 */
+  border-color: #0000C6;
+}
+
+button.copy {
+  background-color: #BBFFBB; /* 淺綠 */
+  border-color: #007500;
+}
+
+button.download {
+  background-color: #FFED97; /* 淺黃 */
+  border-color: #D2691E;
+}
+
+button.btn:hover {
+  filter: brightness(1.05);
+}
+
+.x-label-box {
+  border-width: 3px !important;
+  border-color: #666 !important;
+}
+
+.fancy-remove {
+  background-color: #ffe6e6;
+  border: 2px solid #cc0000;
+  color: #800000;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.fancy-remove:hover {
+  background-color: #ffcccc;
 }
 
 canvas {
@@ -107,3 +185,56 @@ footer {
   font-size: 0.9rem;
   font-weight: normal;
 }
+/* 🔄 暗色模式的主體設定 */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+/* 所有輸入框、選單欄位變深底亮字 */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border: 1px solid #777;
+}
+
+/* 表格等區塊也變深 */
+body.dark-mode .item-group,
+body.dark-mode .note,
+body.dark-mode pre {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border-color: #555;
+}
+
+/* ✅ 按鈕維持彩色外觀，不變灰黑 */
+button {
+  font-weight: bold;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0.25rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#toggleThemeBtn {
+  padding: 10px 15px;
+  margin: 5px 5px 10px 0;
+  font-size: 1rem;
+  border: 4px solid #333;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #272727; /* 深灰 */
+  border-color: #7B7B7B;
+  color: #FFFFFF;
+}
+
+/* 按鈕 hover 效果 */
+button:hover {
+  opacity: 0.85;
+}
+

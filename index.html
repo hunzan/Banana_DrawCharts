@@ -9,33 +9,36 @@
   <link rel="shortcut icon" href="bananachart.ico" type="image/x-icon">
 </head>
 <body>
-  <main role="main" aria-labelledby="pageTitle" aria-describedby="description">
-    <h1 id="pageTitle">歡迎使用蕉圖表🍌</h1>
-    <p aria-label="工具簡介" tabindex="0">鍵盤操作友善的統計圖表繪製工具</p>
-    <p aria-label="工具簡介" tabindex="0">為無障礙環境而開發的教學和職場好幫手</p>
+  <a href="#mainContent" class="skip-link">跳到主要內容</a>
+  <main id="mainContent" tabindex="-1" role="main" aria-labelledby="pageTitle" aria-describedby="description">
+    <h1 aria-label="歡迎使用蕉圖表" id="pageTitle" tabindex="0">歡迎使用蕉圖表🍌📊
+      <button id="csvHelpBtn" class="btn csvHelp">使用說明</button>
+      <button id="toggleThemeBtn" aria-label="色彩反轉" style="margin: 1rem;">
+      色彩反轉
+     </button>
+    </h1>
 
-    <button id="csvHelpBtn" style="background-color: #eef; border: 1px solid #99c; padding: 0.5em 1em; border-radius: 5px;">
-    📘 本工具使用說明
-    </button>
+<div style="text-align: center; line-height: 1.2;" tabindex="0">
+  <p style="font-size: 1.10rem;">鍵盤操作友善的統計圖表繪製工具</p>
+  <p style="font-size: 1.1rem;">為無障礙環境而開發的教學／職場好幫手✌️</p>
+</div>
 
     <label for="chartTitle">圖表名稱：</label>
     <input type="text" id="chartTitle" aria-label="圖表名稱" aria-describedby="description">
 
-    <label for="csvInput">載入 CSV：</label>
-    <!-- 用來選擇 CSV 檔案的隱藏檔案輸入框 -->
     <input type="file" id="csvInput" accept=".csv" style="display:none" />
     <!-- 讓使用者點擊這個按鈕時，觸發打開檔案選擇視窗 -->
-    <button id="csvButton">載入 CSV 檔案</button>
+    <button id="csvButton" class="btn csv">載入 CSV 檔案</button>
 
     <label for="xLabel">X 軸名稱／（單位）：</label>
     <input type="text" id="xLabel" aria-label="X 軸名稱 單位">
 
     <label for="xLabels">X 軸標籤（請以逗號或換行分隔）：</label>
-    <textarea id="xLabels" aria-label="X 軸標籤輸入，請以逗號或換行分隔" rows="3" placeholder="例如：一月, 二月, 三月"></textarea>
+    <textarea id="xLabels" aria-label="X 軸標籤輸入，請以逗號或換行分隔" rows="3" class="w-full" placeholder="例如：一月, 二月, 三月"></textarea>
 
     <section id="itemsSection" aria-label="多組 X 軸資料輸入區"></section>
 
-    <button id="addItemBtn" aria-label="新增X軸項目，最多9項，每項可選顏色">新增X軸項目</button>
+    <button id="addItemBtn" class="btn addItem" aria-label="新增X軸項目，最多9項，每項可選顏色">新增 X 軸項目</button>
 
     <label for="yLabel">Y 軸名稱／（單位）：</label>
     <input type="text" id="yLabel" aria-label="Y 軸名稱 單位">
@@ -58,22 +61,22 @@
       </select>
     </div>
 
-    <button id="drawChartBtn" aria-label="繪製圖表">繪製圖表</button>
-    <button id="clearBtn" aria-label="清除圖表">清除</button>
-    <button id="copyBtn" aria-label="複製圖表">複製圖表</button>
+    <button id="drawChartBtn" class="btn draw" aria-label="繪製圖表">繪製圖表</button>
+    <button id="clearBtn" class="btn clear" aria-label="清除圖表">清除圖表欄位</button>
+    <button id="copyBtn" class="btn copy" aria-label="複製圖表">複製圖表</button>
 
     <label for="downloadFormat">下載格式：</label>
     <select id="downloadFormat" aria-label="下載格式">
       <option value="png">PNG</option>
       <option value="csv">CSV</option>
     </select>
-    <button id="downloadBtn" aria-label="以另存新檔方式下載圖表">另存新檔</button>
+    <button id="downloadBtn" class="btn download" aria-label="以另存新檔方式下載圖表">另存新檔</button>
 
     <canvas id="myChart" width="600" height="400" role="img" aria-label="繪製的圖表"></canvas>
     <div id="liveRegion" aria-live="polite" aria-atomic="true"
          style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
     </div>
-    
+
   </main>
 
   <footer>

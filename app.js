@@ -16,6 +16,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const chartCanvas = document.getElementById('myChart');
   const itemsContainer = document.getElementById('itemsSection');
 
+function speakMessage(message) {
+  const utterance = new SpeechSynthesisUtterance(message);
+  speechSynthesis.speak(utterance);
+  // 如果你有 live region 可同步顯示文字提示
+  const liveRegion = document.getElementById("liveRegion");
+  if (liveRegion) {
+    liveRegion.textContent = message;
+  }
+}
+
   // 綁定事件才會觸發開啟視窗，不要放在全域就呼叫 click()
 document.getElementById('csvButton').addEventListener('click', () => {
   document.getElementById('csvInput').click();
@@ -81,7 +91,7 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
         }
       }
     };
-
+    speakMessage("已載入 CSV 檔");
     reader.readAsText(file); // ← 這一行移進 onload 裡面結尾外面，這才正確
   });
 
@@ -121,7 +131,7 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
         <label for="itemValues${index}">數值（請用逗號或換行分隔，數量需和 X 軸標籤相同）：</label>
         <textarea id="itemValues${index}" aria-label="項目 ${index} 數值輸入" rows="2" placeholder="例如：10, 20, 30"></textarea>
   
-        <button type="button" class="remove-item-btn" aria-label="刪除項目 ${index}">❌ 刪除此項</button>
+        <button type="button" class="remove-item-btn fancy-remove" aria-label="刪除項目 ${index}">❌ 刪除此項</button>
       </fieldset>
     `;
     return div;
@@ -329,6 +339,7 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
     });
 
    document.getElementById('liveRegion').textContent = '圖表已繪製完成';
+   speakMessage("圖表己繪製完成");
   }
 
   // 補：透明色用
@@ -354,17 +365,19 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
     chartTypeSelect.value = 'bar';
     itemsContainer.innerHTML = '';
     itemCount = 0;
-    document.getElementById('liveRegion').textContent = '圖表已清除';
+    speakMessage("圖表欄位已清除");
   });
 
   downloadBtn.addEventListener('click', function () {
+    const titleRaw = document.getElementById("chartTitle").value.trim() || "chart";
+    const title = titleRaw.replace(/[\\/:*?"<>|]/g, "_");  // 避免非法字元
     const labels = getLabels();
     const format = downloadFormat.value;
     if (format === 'png') {
       html2canvas(chartCanvas).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const link = document.createElement('a');
-        link.download = 'chart.png';
+        link.download = `${title}.png`;
         link.href = imgData;
         link.click();
       });
@@ -378,7 +391,7 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
       const blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'chart.csv';
+      link.download = `${title}.csv`;
       link.click();
     }
   });
@@ -394,6 +407,7 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
 
       const item = new ClipboardItem({ 'image/png': blob });
       await navigator.clipboard.write([item]);
+      speakMessage("圖表已複製到剪貼簿");
       alert('PNG 圖已複製到剪貼簿');
     } catch (err) {
       console.error('Clipboard API 錯誤', err);
@@ -642,3 +656,16 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
       });
     }
   });
+
+// 切換深色 / 亮色模式
+const toggleBtn = document.getElementById('toggleThemeBtn');
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    if ('speechSynthesis' in window) {
+      const utter = new SpeechSynthesisUtterance(message);
+      speechSynthesis.speak(utter);
+    }
+  });
+}
