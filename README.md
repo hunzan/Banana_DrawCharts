@@ -57,13 +57,19 @@ Lîm Akâu（林阿猴） & KimTsio（金蕉）
 
 ```bash
 Banana_DrawCharts/
-├── index.html              # 主網頁介面
-├── csv_help.html        # 使用說明
-├── style.css               # 版面樣式
-├── app.js                  # 圖表功能與事件控制
-├── libs/                   # 引用外部 JS 函式庫
-│   ├── Chart.min.js
-│   └── html2canvas.min.js
+├── app.py 
+├── requirements.txt   
+├── README.md 
+├── static/  
+│   ├── style.css
+│   ├── app.js
+│   ├── bananachart.ico
+│   └── libs/ 
+│       ├── chart.min.js
+│       └── html2canvas.min.js
+├── templates/
+│   ├── index.html
+│   └── csv_help.html  
 ```
 
 🟢 如何開啟
