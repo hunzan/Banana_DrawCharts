@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>蕉圖表 純鍵盤操作友善圖表繪製工具</title>
+  <title>蕉圖表🍌鍵盤友善介面圖表繪製工具</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="bananachart.ico" type="image/x-icon">
   <link rel="shortcut icon" href="bananachart.ico" type="image/x-icon">
 </head>
 <body>
   <main role="main" aria-labelledby="pageTitle" aria-describedby="description">
-    <h1 id="pageTitle">蕉圖表🍌</h1>
+    <h1 id="pageTitle">歡迎使用蕉圖表🍌</h1>
+    <p aria-label="工具簡介" tabindex="0">鍵盤操作友善的統計圖表繪製工具</p>
+    <p aria-label="工具簡介" tabindex="0">為無障礙環境而開發的教學和職場好幫手</p>
 
     <button id="csvHelpBtn" style="background-color: #eef; border: 1px solid #99c; padding: 0.5em 1em; border-radius: 5px;">
     📘 本工具使用說明
@@ -68,12 +70,10 @@
     <button id="downloadBtn" aria-label="以另存新檔方式下載圖表">另存新檔</button>
 
     <canvas id="myChart" width="600" height="400" role="img" aria-label="繪製的圖表"></canvas>
-    <div id="liveRegion" aria-live="polite" style="position:absolute; left:-9999px;"></div>
-
     <div id="liveRegion" aria-live="polite" aria-atomic="true"
-     style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+         style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
     </div>
-
+    
   </main>
 
   <footer>
