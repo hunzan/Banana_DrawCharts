@@ -124,13 +124,13 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
         <legend>項目 ${index}</legend>
         <label for="itemName${index}">名稱：</label>
         <input type="text" id="itemName${index}" aria-label="項目 ${index} 名稱" placeholder="例如：產品A">
-  
+
         <label for="itemColor${index}">顏色：</label>
         <select id="itemColor${index}" aria-label="項目 ${index} 顏色">${colorOptions}</select>
-  
+
         <label for="itemValues${index}">數值（請用逗號或換行分隔，數量需和 X 軸標籤相同）：</label>
         <textarea id="itemValues${index}" aria-label="項目 ${index} 數值輸入" rows="2" placeholder="例如：10, 20, 30"></textarea>
-  
+
         <button type="button" class="remove-item-btn fancy-remove" aria-label="刪除項目 ${index}">❌ 刪除此項</button>
       </fieldset>
     `;
