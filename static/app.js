@@ -339,7 +339,7 @@ document.getElementById('csvInput').addEventListener('change', function(e) {
     });
 
    document.getElementById('liveRegion').textContent = '圖表已繪製完成';
-   speakMessage("圖表己繪製完成");
+   speakMessage("圖表已繪製完成");
   }
 
   // 補：透明色用
